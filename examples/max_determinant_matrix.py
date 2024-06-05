@@ -1,4 +1,4 @@
-"""Finds large determinant of a matrix
+"""Finds a matrix have largest determinant in `n*n` dimensions.
 """
 import itertools
 
@@ -55,7 +55,7 @@ def solve(n: int) -> np.ndarray:
   # Build `matrix_array` greedily, using priorities for prioritization.
   matrix_array = []
   while np.any(priorities != -np.inf):
-    # Add a vector with maximum priority to `max_det_matrix`, and set priorities of
+    # Add a vector with maximum priority to `matrix_array`, and set priorities of
     # invalidated vectors to `-inf`, so that they never get selected.
     max_index = np.argmax(priorities)
     vector = all_vectors[None, max_index]  # [1, n]
@@ -69,14 +69,15 @@ def solve(n: int) -> np.ndarray:
 
 @funsearch.evolve
 def priority(el: int, n: int) -> float:
-  """Returns the priority with which we want to add `element` to the matrix.
-  el is an integer from 1 to n*n.
-  """
-  # return 0.0
-  # Calculate the priority based on the element's value and the matrix dimension.
-  priority_value = (el % n) * n + el // n + 1
-  return priority_value + 0.0
-    
+  """Improved version of `priority`."""
+  # The determinant of a matrix with only one element is the element itself.
+  if n == 1:
+    return el
 
-# print(solve(3))
-# print(evaluate(3))
+  # The determinant of a diagonal matrix is the product of its elements.
+  # So, ideally, if we have some knowledge about the elements, we want them to be as largest as possible, to have a large determinant.
+  if el > n:
+    return n / el + np.random.uniform(0, 1) * 0.9
+  # If no such knowledge exists, we assign a random priority, since any permutation could potentially lead to a large determinant.
+  else:
+    return np.random.uniform(0, 1) * 0.9
