@@ -46,13 +46,13 @@ def fill_diagonal_matrix(lst, n):
   return result
 
 def solve(n: int) -> np.ndarray:
-  """Returns a large cap set in `n` dimensions."""
+  """Returns a matrx in `n*n` dimensions."""
   all_vectors = np.array(list(range(1, n*n+1)), dtype=np.int32)
 
   # Precompute all priorities.
   priorities = np.array([priority(vector, n) for vector in all_vectors])
 
-  # Build `max_det_matrix` greedily, using priorities for prioritization.
+  # Build `matrix_array` greedily, using priorities for prioritization.
   matrix_array = []
   while np.any(priorities != -np.inf):
     # Add a vector with maximum priority to `max_det_matrix`, and set priorities of
@@ -69,7 +69,7 @@ def solve(n: int) -> np.ndarray:
 
 @funsearch.evolve
 def priority(el: int, n: int) -> float:
-  """Returns the priority with which we want to add `element` to the cap set.
+  """Returns the priority with which we want to add `element` to the matrix.
   el is an integer from 1 to n*n.
   """
   # return 0.0
