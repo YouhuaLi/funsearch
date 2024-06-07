@@ -1,5 +1,4 @@
 """Finds short superpermutation
-
 On every iteration, improve priority_v1 over the priority_vX methods from previous iterations.
 Make only small changes.
 Try to make the code short.
@@ -34,7 +33,7 @@ def solve(n: int) -> str:
     max_priority, next_perm = -1, None
     for perm in perm_strs:
       if perm not in used:
-        priority_score = priority(super_perm, perm)
+        priority_score = priority(super_perm, perm, n)
         if priority_score > max_priority:
           max_priority, next_perm = priority_score, perm
     overlap = next((i for i in range(len(next_perm), 0, -1) if super_perm.endswith(next_perm[:i])), 0)
@@ -43,10 +42,12 @@ def solve(n: int) -> str:
   return super_perm
 
 @funsearch.evolve
-def priority(super_perm, next_perm) -> float:
+def priority(super_perm, next_perm, n) -> float:
   """Returns the priority of the next_perm. the longer overlap, the higher priority it is"""
-  #return next((i for i in range(len(next_perm), 0, -1) if super_perm.endswith(next_perm[:i])), 0)
-  return 0.0
+  overlap = len(super_perm) - 1
+  while overlap > 0 and super_perm[-overlap:] != next_perm[:overlap]:
+    overlap -= 1
+  return overlap / len(next_perm)
 
 print(solve(3))
 print(evaluate(3))
