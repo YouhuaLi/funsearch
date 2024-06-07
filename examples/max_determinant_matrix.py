@@ -1,4 +1,7 @@
-"""Finds a matrix have largest determinant in `n*n` dimensions.
+"""Finds a matrix have the largest determinant in `n*n` dimensions.
+On every iteration, improve priority_v1 over the priority_vX methods from previous iterations.
+Make only small changes.
+Try to make the code short.
 """
 import itertools
 
@@ -19,7 +22,7 @@ def evaluate(n: int) -> int:
   return abs(round(np.linalg.det(mtr)))
 
 def diagonal_indices(n: int) -> list:
-  """ 生成n*n矩阵按对角线顺序填充的索引列表 """
+  """ Generate a list of indices for an n*n matrix filled in diagonal order """
   indices = []
   for k in range(2 * n - 1):
       for i in range(n):
@@ -29,9 +32,9 @@ def diagonal_indices(n: int) -> list:
   return indices
 
 def fill_diagonal_matrix(lst, n):
-  """ 将列表lst填充到一个n*n矩阵中，按对角线顺序 """
+  """ Fill the list lst into an n*n matrix, in diagonal order. """
   if len(lst) != n * n:
-      raise ValueError("列表长度不符合 n*n 的要求")
+      raise ValueError("lst must have n*n elements.")
   
   # 创建一个 n*n 的零数组
   result = np.zeros((n, n), dtype=int)
@@ -69,15 +72,7 @@ def solve(n: int) -> np.ndarray:
 
 @funsearch.evolve
 def priority(el: int, n: int) -> float:
-  """Improved version of `priority`."""
-  # The determinant of a matrix with only one element is the element itself.
-  if n == 1:
-    return el
-
-  # The determinant of a diagonal matrix is the product of its elements.
-  # So, ideally, if we have some knowledge about the elements, we want them to be as largest as possible, to have a large determinant.
-  if el > n:
-    return n / el + np.random.uniform(0, 1) * 0.9
-  # If no such knowledge exists, we assign a random priority, since any permutation could potentially lead to a large determinant.
-  else:
-    return np.random.uniform(0, 1) * 0.9
+  """Returns the priority with which we want to add `element` to the matrix.
+  el is a number of values 1-n*n.
+  """
+  return 0.0
