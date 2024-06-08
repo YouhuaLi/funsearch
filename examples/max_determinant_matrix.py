@@ -73,6 +73,7 @@ def solve(n: int) -> np.ndarray:
 @funsearch.evolve
 def priority(el: int, n: int) -> float:
   """Returns the priority with which we want to add `element` to the matrix.
+  the order of filling the matrix is from the diagonal.
   el is a number of values 1-n*n.
   """
   return 0.0
