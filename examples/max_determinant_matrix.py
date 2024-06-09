@@ -19,7 +19,7 @@ def evaluate(n: int) -> int:
   """
   mtr = solve(n)
   # https://oeis.org/A085000
-  best_known_score = {1: 1, 2: 10, 3: 412, 4: 40800, 5: 6839492, 6: 1865999570, 7: 762150368499, 8: 440960274696935}
+  best_known_score = {1: 1, 2: 10, 3: 412, 4: 40800, 5: 6839492, 6: 1865999570, 7: 762150368499, 8: 440970981670289}
   score = abs(round(np.linalg.det(mtr))) - best_known_score[n]
   if score >= 0:
     print(mtr)
