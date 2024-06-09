@@ -18,8 +18,12 @@ def evaluate(n: int) -> int:
      if there is duplicate cells return -inf
   """
   mtr = solve(n)
+  # https://oeis.org/A085000
   best_known_score = {1: 1, 2: 10, 3: 412, 4: 40800, 5: 6839492, 6: 1865999570, 7: 762150368499, 8: 440960274696935}
-  return abs(round(np.linalg.det(mtr))) - best_known_score[n]
+  score = abs(round(np.linalg.det(mtr))) - best_known_score[n]
+  if score >= 0:
+    print(mtr)
+  return score
 
 def diagonal_indices(n: int) -> list:
   """ Generate a list of indices for an n*n matrix filled in diagonal order """

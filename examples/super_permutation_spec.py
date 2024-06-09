@@ -17,8 +17,9 @@ def evaluate(n: int) -> int:
   :return: Length of the super permutation.
   """
   super_permutation = solve(n)
-  #print(super_permutation)
-  return -len(super_permutation)
+  # https://oeis.org/A180632
+  best_known_score = {1: 1, 2: 3, 3: 9, 4: 33, 5: 153, 6: 872, 7: 5908, 8: 46205, 9: 408966}
+  return best_known_score[n]-len(super_permutation)
 
 
 def solve(n: int) -> str:
@@ -49,5 +50,4 @@ def priority(super_perm, next_perm, n) -> float:
     overlap -= 1
   return overlap / len(next_perm)
 
-print(solve(3))
-print(evaluate(3))
+print(evaluate(7)) 
