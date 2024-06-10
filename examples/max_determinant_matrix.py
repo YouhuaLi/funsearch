@@ -80,4 +80,4 @@ def priority(el: int, n: int) -> float:
   the order of filling the matrix is from the diagonal.
   el is a number of values 1-n*n.
   """
-  return 0.0
+  return 1/ (n - el)
