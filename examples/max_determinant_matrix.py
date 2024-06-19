@@ -80,4 +80,13 @@ def priority(el: int, n: int) -> float:
   the order of filling the matrix is from the diagonal.
   el is a number of values 1-n*n.
   """
-  return 1/ (n - el)
+  def matrix_sign(el: int, n: int) -> int:
+    """Determines whether to multiply the matrix, flip, or stay."""
+    remainder = el % 2
+    first, second = divmod(el, n)
+
+    order = max(first - remainder, remainder)
+
+    return max(order, len(str(second + 1))) / n
+
+  return matrix_sign(el, n)
